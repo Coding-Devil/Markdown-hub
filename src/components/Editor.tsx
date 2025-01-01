@@ -15,7 +15,14 @@ export default function Editor() {
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const isMobileView = window.innerWidth <= 768;
+      setIsMobile(isMobileView);
+      // Set editor-only view when on mobile
+      if (isMobileView) {
+        setViewMode('editor');
+      } else {
+        setViewMode('split'); // Reset to split view on desktop
+      }
     };
     
     checkMobile();
