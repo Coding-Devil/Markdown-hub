@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Split from 'react-split';
 import { Toolbar } from './Toolbar';
 import { Preview } from './Preview';
@@ -6,11 +6,19 @@ import { ExportPanel } from './ExportPanel';
 import { useMarkdown } from '../hooks/useMarkdown';
 import { toast } from 'react-hot-toast';
 import { Maximize2, Minimize2, PanelLeft, PanelRight, Columns } from 'lucide-react';
+import { useMediaQuery } from '../hooks/useMediaQuery';
 
 export default function Editor() {
   const { markdown, setMarkdown, insertText } = useMarkdown();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [viewMode, setViewMode] = useState<'split' | 'editor' | 'preview'>('split');
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  useEffect(() => {
+    if (isMobile) {
+      setViewMode('editor');
+    }
+  }, [isMobile]);
 
   const renderContent = () => {
     if (viewMode === 'editor') {
@@ -33,9 +41,10 @@ export default function Editor() {
     return (
       <Split
         sizes={[50, 50]}
-        minSize={200}
-        gutterSize={8}
+        minSize={isMobile ? 200 : 300}
+        gutterSize={isMobile ? 0 : 10}
         className="split h-full"
+        direction={isMobile ? 'vertical' : 'horizontal'}
       >
         <div className="h-full overflow-auto editor-container">
           <textarea
