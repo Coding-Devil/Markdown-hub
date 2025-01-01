@@ -1,0 +1,509 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom color scheme */
+:root {
+  --editor-bg: linear-gradient(135deg, #1a1c2e 0%, #16181f 100%);
+  --toolbar-bg: rgba(28, 30, 48, 0.95);
+  --editor-space: linear-gradient(135deg, #20223a 0%, #1c1e2d 100%);
+  --preview-bg: linear-gradient(135deg, #1e2035 0%, #1a1c2c 100%);
+}
+
+body {
+  background: var(--editor-bg);
+  color: #e2e8f0;
+}
+
+.editor-container {
+  background: var(--editor-space);
+  height: 100%;
+  overflow: hidden;
+}
+
+.editor-container textarea {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.toolbar {
+  background: linear-gradient(180deg, 
+    rgba(15, 16, 28, 0.95) 0%,
+    rgba(17, 18, 32, 0.95) 100%
+  );
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.preview-container {
+  background: var(--preview-bg);
+  max-width: 65rem;
+  margin: 0 auto;
+  padding: 2rem 4rem;
+}
+
+/* Split view styles */
+.split {
+  display: flex;
+}
+
+.gutter {
+  background-color: rgba(99, 102, 241, 0.15);
+  background-repeat: no-repeat;
+  background-position: 50%;
+}
+
+.gutter:hover {
+  background-color: rgba(99, 102, 241, 0.3);
+}
+
+.gutter.gutter-horizontal {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+  cursor: col-resize;
+}
+
+/* Prose Styles */
+.prose {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.8;
+}
+
+.prose pre {
+  background-color: rgba(15, 23, 42, 0.5) !important;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875em;
+}
+
+.prose code {
+  background-color: rgba(15, 23, 42, 0.5);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  color: #818cf8;
+  font-family: 'Fira Code', monospace;
+}
+
+.prose h1 {
+  font-size: 2.25em;
+  margin-top: 0;
+  margin-bottom: 0.8888889em;
+  line-height: 1.1111111;
+}
+
+.prose h2 {
+  font-size: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3333333;
+}
+
+.prose h3 {
+  font-size: 1.25em;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.6;
+}
+
+.prose p {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  line-height: 1.8;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2em 0;
+  font-size: 0.875em;
+  line-height: 1.7142857;
+  text-align: left;
+  border: 2px solid rgba(99, 102, 241, 0.3);
+}
+
+.prose table th,
+.prose table td {
+  border: 2px solid rgba(99, 102, 241, 0.3);
+  padding: 0.75em 1em;
+}
+
+.prose table th {
+  background-color: rgba(99, 102, 241, 0.1);
+  font-weight: 600;
+  text-align: left;
+}
+
+.prose table td {
+  padding: 0.75em 1em;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  vertical-align: top;
+}
+
+.prose table tr:nth-child(even) {
+  background-color: rgba(15, 23, 42, 0.3);
+}
+
+.prose blockquote {
+  font-style: italic;
+  border-left: 4px solid #818cf8;
+  padding: 1em 1.5em;
+  margin: 1.5em 0;
+  background: rgba(15, 23, 42, 0.3);
+  border-radius: 0 0.5rem 0.5rem 0;
+  color: #94a3b8;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose ul, .prose ol {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose > ul > li p {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose img {
+  margin: 2em 0;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.prose hr {
+  margin: 3em 0;
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.prose input[type="checkbox"] {
+  margin-right: 0.5rem;
+  accent-color: #818cf8;
+}
+
+/* Print styles */
+@media print {
+  /* Reset all styles for print */
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -ms-filter: none !important;
+  }
+
+  /* Basic page setup */
+  @page {
+    margin: 2cm;
+  }
+
+  body {
+    font-family: Georgia, serif !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Content container */
+  .preview-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Typography */
+  .prose {
+    max-width: none !important;
+  }
+
+  .prose h1 {
+    font-size: 24pt !important;
+    margin-top: 24pt !important;
+    margin-bottom: 16pt !important;
+  }
+
+  .prose h2 {
+    font-size: 18pt !important;
+    margin-top: 20pt !important;
+    margin-bottom: 12pt !important;
+  }
+
+  .prose h3 {
+    font-size: 14pt !important;
+    margin-top: 16pt !important;
+    margin-bottom: 8pt !important;
+  }
+
+  .prose p, .prose ul, .prose ol {
+    font-size: 11pt !important;
+    margin-bottom: 12pt !important;
+  }
+
+  /* Tables */
+  .prose table {
+    page-break-inside: avoid !important;
+    border: 1pt solid #000 !important;
+    width: 100% !important;
+  }
+
+  .prose th {
+    background-color: #f0f0f0 !important;
+    font-weight: bold !important;
+    border: 1pt solid #000 !important;
+    padding: 8pt !important;
+  }
+
+  .prose td {
+    border: 1pt solid #000 !important;
+    padding: 8pt !important;
+  }
+
+  /* Code blocks */
+  .prose pre {
+    page-break-inside: avoid !important;
+    border: 1pt solid #ccc !important;
+    padding: 8pt !important;
+    background-color: #f8f8f8 !important;
+    font-family: Consolas, monospace !important;
+    font-size: 9pt !important;
+  }
+
+  .prose code {
+    font-family: Consolas, monospace !important;
+    font-size: 9pt !important;
+    background-color: #f8f8f8 !important;
+    padding: 2pt 4pt !important;
+    border: none !important;
+  }
+
+  /* Links */
+  .prose a {
+    text-decoration: underline !important;
+    color: #000 !important;
+  }
+
+  .prose a[href^="http"]:after {
+    content: " (" attr(href) ")";
+  }
+
+  /* Images */
+  .prose img {
+    max-width: 100% !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Hide editor elements */
+  .editor-container,
+  .toolbar,
+  .gutter {
+    display: none !important;
+  }
+
+  /* Force backgrounds to print */
+  .prose * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.7);
+}
+
+/* Add these styles for emoji sizing */
+.prose img.emoji {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
+  background: none;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+/* Update toolbar background to be more distinct */
+.toolbar {
+  background: linear-gradient(180deg, 
+    rgba(17, 19, 32, 0.95) 0%,
+    rgba(22, 24, 41, 0.95) 100%
+  );
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+/* Update inline code highlighting - more subtle */
+.prose code:not(pre code) {
+  background-color: rgba(234, 179, 8, 0.15);
+  color: #fde68a;
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-weight: 400;
+  border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+/* Add these styles for better page layout in HTML export */
+@media screen and (min-width: 1280px) {
+  .preview-container {
+    max-width: 80rem;
+    padding: 2rem 6rem;
+  }
+}
+
+@media screen and (max-width: 1279px) {
+  .preview-container {
+    max-width: 65rem;
+    padding: 2rem 4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .preview-container {
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* Update toolbar buttons */
+.toolbar button {
+  background: rgba(30, 32, 50, 0.6);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  transition: all 0.2s ease;
+}
+
+.toolbar button:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+.toolbar button:active {
+  transform: translateY(0px);
+}
+
+/* Update toolbar divider */
+.toolbar .divider {
+  background: rgba(99, 102, 241, 0.2);
+  width: 1px;
+  height: 24px;
+  margin: 0 0.5rem;
+}
+
+/* Update toolbar icons */
+.toolbar svg {
+  color: #818cf8;
+  transition: color 0.2s ease;
+}
+
+.toolbar button:hover svg {
+  color: #a5b4fc;
+}
+
+/* Add responsive styles */
+@media screen and (max-width: 768px) {
+  .toolbar {
+    padding: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .toolbar button {
+    padding: 0.5rem !important;
+  }
+
+  .toolbar .divider {
+    display: none; /* Hide dividers on mobile */
+  }
+
+  .editor-container textarea,
+  .preview-container {
+    padding: 1rem !important;
+  }
+
+  .preview-container {
+    font-size: 0.9em;
+  }
+
+  /* Adjust split view for mobile */
+  .split {
+    flex-direction: column !important;
+  }
+
+  .gutter-horizontal {
+    display: none !important;
+  }
+}
+
+/* Developer signature styles */
+.dev-signature {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(15, 16, 28, 0.95);
+  padding: 0.5rem 0.75rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  z-index: 50;
+  border: 1px solid transparent;
+  animation: borderPulse 2s ease-in-out infinite;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    to right,
+    #818cf8,
+    #6366f1
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(99, 102, 241, 0.2); }
+  50% { border-color: rgba(99, 102, 241, 0.6); }
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+  .dev-signature {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    padding: 0.4rem 0.6rem;
+  }
+}

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia&family=Arial:wght@400;600&family=Consolas&display=swap" rel="stylesheet">
+    <title>Markdown Editor</title>
+    <style>
+      @media print {
+        @page {
+          size: A4;
+          margin: 2cm;
+        }
+        
+        body {
+          font-family: Georgia, serif;
+          line-height: 1.6;
+          color: #1a1a1a;
+          background: white;
+          font-size: 11pt;
+        }
+
+        /* Force background colors to print */
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+
+        /* Hide editor elements */
+        .editor-container, .toolbar, .gutter {
+          display: none !important;
+        }
+
+        /* Reset preview container for print */
+        .preview-container {
+          width: 100% !important;
+          max-width: none !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          background: white !important;
+          color: #1a1a1a !important;
+        }
+
+        /* Print-specific typography */
+        .prose {
+          font-family: Georgia, serif !important;
+          line-height: 1.6 !important;
+          color: #1a1a1a !important;
+        }
+
+        .prose h1, .prose h2, .prose h3 {
+          font-family: Arial, sans-serif !important;
+          color: #1a1a1a !important;
+          break-after: avoid !important;
+        }
+
+        .prose pre, .prose code {
+          font-family: Consolas, monospace !important;
+        }
+
+        /* Print-specific table styles */
+        .prose table {
+          width: 100% !important;
+          border-collapse: collapse !important;
+          break-inside: avoid !important;
+        }
+
+        .prose th, .prose td {
+          border: 1pt solid #000 !important;
+          padding: 8pt !important;
+        }
+
+        .prose th {
+          background-color: #f3f4f6 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
