@@ -6,8 +6,8 @@
 :root {
   --editor-bg: linear-gradient(135deg, #1a1c2e 0%, #16181f 100%);
   --toolbar-bg: rgba(28, 30, 48, 0.95);
-  --editor-space: linear-gradient(135deg, #20223a 0%, #1c1e2d 100%);
-  --preview-bg: linear-gradient(135deg, #1e2035 0%, #1a1c2c 100%);
+  --editor-space: linear-gradient(135deg, #1a1c2e 0%, #181a2a 100%);
+  --preview-bg: linear-gradient(135deg, #0d0914 0%, #100b1e 100%);
 }
 
 body {
@@ -92,7 +92,7 @@ body {
 }
 
 .prose h1 {
-  font-size: 2.25em;
+  font-size: 1.75em;
   margin-top: 0;
   margin-bottom: 0.8888889em;
   line-height: 1.1111111;
@@ -360,7 +360,7 @@ body {
 .toolbar {
   background: linear-gradient(180deg, 
     rgba(17, 19, 32, 0.95) 0%,
-    rgba(22, 24, 41, 0.95) 100%
+    rgba(18, 20, 35, 0.95) 100%
   );
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(99, 102, 241, 0.2);
@@ -436,10 +436,64 @@ body {
 /* Add responsive styles */
 @media screen and (max-width: 768px) {
   .toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3.5rem;
     padding: 0.5rem;
-    flex-wrap: wrap;
+    background: rgba(15, 16, 28, 0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+    z-index: 50;
+    display: flex !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     gap: 0.5rem;
+  }
+
+  /* Add padding to ensure first and last items are reachable */
+  .toolbar::before,
+  .toolbar::after {
+    content: '';
+    padding: 0.5rem;
+  }
+
+  /* Make the toolbar items container full width and scrollable */
+  .toolbar > .flex:first-child {
+    display: flex;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+    flex-shrink: 0;
+    margin-right: 0; /* Remove auto margin */
+  }
+
+  /* Keep the right-side buttons visible and scrollable */
+  .toolbar > .ml-auto {
+    display: flex;
+    gap: 0.5rem;
+    padding-left: 0.5rem;
+    flex-shrink: 0;
+    margin-left: 0; /* Remove auto margin */
+    border-left: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  /* Adjust toolbar buttons for touch */
+  .toolbar button {
+    padding: 0.5rem !important;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .toolbar::-webkit-scrollbar {
+    display: none;
   }
 
   .toolbar button {
