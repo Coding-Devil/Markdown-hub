@@ -6,19 +6,23 @@ import { ExportPanel } from './ExportPanel';
 import { useMarkdown } from '../hooks/useMarkdown';
 import { toast } from 'react-hot-toast';
 import { Maximize2, Minimize2, PanelLeft, PanelRight, Columns } from 'lucide-react';
-import { useMediaQuery } from '../hooks/useMediaQuery';
 
 export default function Editor() {
   const { markdown, setMarkdown, insertText } = useMarkdown();
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [viewMode, setViewMode] = useState<'split' | 'editor' | 'preview'>('split');
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (isMobile) {
-      setViewMode('editor');
-    }
-  }, [isMobile]);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const renderContent = () => {
     if (viewMode === 'editor') {
